@@ -635,7 +635,6 @@
         height: 100%;
         display: block;
         transition: transform 0.5s;
-        /* Will be mirrored via animation */
       }
       @keyframes flyDragon {
         0% {
@@ -667,6 +666,12 @@
         .nav {
           padding: 1rem 1.2rem;
         }
+        .dragon {
+          width: 260px;
+          height: 170px;
+          top: 10%;
+          left: -60px;
+        }
       }
       @media (max-width: 600px) {
         .section {
@@ -689,6 +694,75 @@
         .footer-links {
           gap: 1rem;
         }
+        .dragon {
+          width: 48vw;
+          min-width: 140px;
+          max-width: 95vw;
+          height: 22vw;
+          min-height: 60px;
+          max-height: 160px;
+          top: 8%;
+          left: -30px;
+        }
+        .hero-content {
+          padding: 1.2rem;
+        }
+        .title {
+          font-size: 2.2rem;
+        }
+        .tagline {
+          font-size: 1.1rem;
+        }
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        z-index: 1100;
+      }
+      .hamburger span {
+        display: block;
+        width: 28px;
+        height: 4px;
+        margin: 4px 0;
+        background: var(--accent);
+        border-radius: 2px;
+        transition: 0.3s;
+      }
+      @media (max-width: 900px) {
+        .nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: rgba(17, 24, 39, 0.98);
+          flex-direction: column;
+          align-items: center;
+          gap: 0;
+          padding: 0.5rem 0 1.5rem 0;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+          border-radius: 0 0 18px 18px;
+          display: none;
+        }
+        .nav.nav-open .nav-links {
+          display: flex;
+        }
+        .hamburger {
+          display: flex;
+        }
+      }
+      .nav.nav-open .hamburger span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+      .nav.nav-open .hamburger span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav.nav-open .hamburger span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
       }
     </style>
     <link
@@ -703,6 +777,11 @@
   <body>
     <nav class="nav">
       <div class="logo">Hack Of Thrones</div>
+      <div class="hamburger" id="hamburger-menu" aria-label="Open navigation" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <div class="nav-links">
         <a href="#about" class="nav-link">About</a>
         <a href="#timeline" class="nav-link">Timeline</a>
@@ -1119,6 +1198,24 @@
       }
       setInterval(updateCountdown, 1000);
       updateCountdown();
+
+      // Hamburger menu functionality
+      const hamburger = document.getElementById('hamburger-menu');
+      const nav = document.querySelector('.nav');
+      hamburger.addEventListener('click', () => {
+        nav.classList.toggle('nav-open');
+      });
+      hamburger.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          nav.classList.toggle('nav-open');
+        }
+      });
+      // Optional: Close menu when a link is clicked (for better UX)
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('nav-open');
+        });
+      });
     </script>
   </body>
 </html>
