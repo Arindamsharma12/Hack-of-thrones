@@ -49,7 +49,7 @@
             rgba(0, 0, 0, 0.7),
             rgba(0, 0, 0, 0.7)
           ),
-          url("/img/hackofthrones.jpg");
+          url("img/hackofthrones.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -66,7 +66,10 @@
 
       .hero-content {
         z-index: 1;
-        padding: 2rem;
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       .title {
@@ -90,74 +93,121 @@
       }
 
       .cta-button {
-        padding: 1rem 2rem;
-        font-size: 1.2rem;
-        background-color: var(--accent);
+        padding: 1.2rem 2.5rem;
+        font-size: 1.25rem;
+        background: linear-gradient(90deg, var(--accent) 80%, #ffe066 100%);
         color: var(--primary);
         border: none;
-        border-radius: 4px;
+        border-radius: 8px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.2s cubic-bezier(.4,2,.6,1);
         text-transform: uppercase;
         font-weight: bold;
-        margin-top: 1rem;
+        margin-top: 1.5rem;
+        box-shadow: 0 2px 12px rgba(251,191,36,0.13);
+        position: relative;
+        overflow: hidden;
       }
 
-      .cta-button:hover {
-        background-color: #e0a800;
-        transform: translateY(-3px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      .cta-button:active {
+        transform: scale(0.97);
+        box-shadow: 0 1px 4px rgba(251,191,36,0.18);
+      }
+
+      .cta-button::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255,255,255,0.2);
+        border-radius: 100%;
+        transform: translate(-50%, -50%);
+        transition: width 0.3s, height 0.3s;
+        z-index: 0;
+      }
+
+      .cta-button:active::after {
+        width: 200%;
+        height: 200%;
       }
 
       .nav {
-        position: fixed;
+        position: sticky;
         top: 0;
         left: 0;
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1.5rem 2rem;
-        z-index: 100;
-        background-color: rgba(17, 24, 39, 0.8);
-        backdrop-filter: blur(10px);
+        padding: 1.2rem 3rem;
+        z-index: 1000;
+        background: rgba(17, 24, 39, 0.85);
+        backdrop-filter: blur(16px);
+        border-radius: 0 0 18px 18px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+        transition: padding 0.3s, background 0.3s;
+      }
+
+      .nav:hover {
+        background: rgba(17, 24, 39, 0.95);
       }
 
       .logo {
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: bold;
         color: var(--accent);
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+
+      .logo:hover {
+        transform: scale(1.08) rotate(-2deg);
+        text-shadow: 0 2px 8px rgba(251,191,36,0.2);
       }
 
       .nav-links {
         display: flex;
-        gap: 2rem;
+        gap: 2.5rem;
       }
 
       .nav-link {
         color: var(--text);
         text-decoration: none;
-        font-size: 1rem;
-        transition: all 0.3s ease;
+        font-size: 1.1rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        transition: background 0.2s, color 0.2s, transform 0.2s;
       }
 
       .nav-link:hover {
-        color: var(--accent);
+        color: var(--primary);
+        background: var(--accent);
+        transform: scale(1.08);
       }
 
       .section {
-        padding: 5rem 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
+        padding: 7rem 2rem 7rem 2rem;
+        max-width: 950px;
+        margin: 0 auto 5rem auto;
+        background: rgba(31, 41, 55, 0.8);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
       }
 
       .section-title {
         text-align: center;
-        font-size: 2.5rem;
-        margin-bottom: 3rem;
+        font-size: 3rem;
+        margin-bottom: 4rem;
         color: var(--accent);
         text-transform: uppercase;
         position: relative;
+        letter-spacing: 2.5px;
+        font-weight: 700;
       }
 
       .section-title::after {
@@ -171,17 +221,36 @@
         background-color: var(--accent);
       }
 
-      .about-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
+      .about-content, .venue-content {
+        display: flex;
+        flex-direction: row;
+        gap: 5rem;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .about-text, .venue-text {
+        flex: 1;
+      }
+
+      .about-text p, .venue-text p {
+        font-size: 1.18rem;
+        line-height: 2;
+        margin-bottom: 2.2rem;
+        text-align: left;
+      }
+
+      .about-image, .venue-map {
+        flex: 1;
+        display: flex;
+        justify-content: center;
         align-items: center;
       }
 
-      .about-text p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
+      .about-image img, .venue-map img {
+        max-width: 92%;
+        border-radius: 14px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.18);
       }
 
       .timeline {
@@ -248,24 +317,28 @@
       .prizes-content {
         display: flex;
         justify-content: center;
-        gap: 2rem;
-        padding: 2rem 0;
+        gap: 3rem;
+        padding: 2.5rem 0;
         flex-wrap: wrap;
       }
 
       .prize-card {
-        background-color: var(--secondary);
-        padding: 2rem;
-        border-radius: 8px;
+        background: linear-gradient(135deg, var(--secondary) 80%, #232b3a 100%);
+        padding: 2.7rem 2.2rem;
+        border-radius: 16px;
         text-align: center;
-        width: 300px;
-        transition: all 0.3s ease;
+        width: 340px;
+        margin: 1.2rem 0;
+        transition: all 0.3s cubic-bezier(.4,2,.6,1);
         border: 2px solid transparent;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+        cursor: pointer;
       }
 
       .prize-card:hover {
-        transform: translateY(-10px);
+        transform: translateY(-12px) scale(1.04) rotate(-1deg);
         border-color: var(--accent);
+        box-shadow: 0 8px 32px rgba(251,191,36,0.13);
       }
 
       .prize-title {
@@ -284,11 +357,8 @@
         color: var(--text-dark);
       }
 
-      .venue-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-        align-items: center;
+      .venue-text {
+        flex: 1;
       }
 
       .venue-text h3 {
@@ -303,69 +373,74 @@
         margin-bottom: 1.5rem;
       }
 
-      .venue-map {
-        height: 400px;
-        background-color: var(--secondary);
-        border-radius: 8px;
-        overflow: hidden;
-      }
-
       .sponsors-content {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 3rem;
-        padding: 2rem 0;
+        padding: 2.5rem 0 0 0;
+        align-items: center;
       }
 
       .sponsor-title {
         font-size: 1.8rem;
         width: 100%;
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         color: var(--text-dark);
       }
 
       .sponsor-logo {
-        width: 200px;
-        height: 80px;
+        width: 210px;
+        height: 90px;
         background-color: var(--secondary);
-        border-radius: 8px;
+        border-radius: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(.4,2,.6,1);
+        margin-bottom: 1.2rem;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+        cursor: pointer;
       }
 
       .sponsor-logo:hover {
-        transform: scale(1.05);
+        transform: scale(1.08) rotate(-2deg);
+        box-shadow: 0 8px 32px rgba(251,191,36,0.13);
       }
 
       .faq-content {
-        max-width: 800px;
+        max-width: 750px;
         margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
       }
 
       .faq-item {
-        margin-bottom: 1.5rem;
+        margin-bottom: 0;
         background-color: var(--secondary);
-        border-radius: 8px;
+        border-radius: 10px;
         overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.09);
       }
 
       .faq-question {
-        padding: 1.5rem;
-        font-size: 1.2rem;
+        padding: 1.7rem;
+        font-size: 1.22rem;
         cursor: pointer;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        background: rgba(0,0,0,0.07);
+        font-weight: 600;
       }
 
       .faq-answer {
-        padding: 0 1.5rem 1.5rem;
-        font-size: 1rem;
+        padding: 0 1.7rem 1.7rem;
+        font-size: 1.05rem;
         color: var(--text-dark);
+        line-height: 1.8;
       }
 
       .faq-question::after {
@@ -374,9 +449,12 @@
       }
 
       .footer {
-        background-color: var(--secondary);
-        padding: 3rem 2rem;
+        background: linear-gradient(90deg, var(--secondary) 80%, #232b3a 100%);
+        padding: 4rem 2rem;
         text-align: center;
+        border-radius: 18px 18px 0 0;
+        box-shadow: 0 -2px 16px rgba(0,0,0,0.08);
+        margin-top: 4rem;
       }
 
       .footer-content {
@@ -388,26 +466,30 @@
       }
 
       .footer-logo {
-        font-size: 2rem;
+        font-size: 2.2rem;
         font-weight: bold;
         color: var(--accent);
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
+        letter-spacing: 2px;
       }
 
       .footer-links {
         display: flex;
-        gap: 2rem;
-        margin-bottom: 2rem;
+        gap: 2.5rem;
+        margin-bottom: 2.5rem;
       }
 
       .footer-link {
         color: var(--text);
         text-decoration: none;
-        transition: all 0.3s ease;
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: color 0.2s, text-shadow 0.2s;
       }
 
       .footer-link:hover {
         color: var(--accent);
+        text-shadow: 0 2px 8px rgba(251,191,36,0.13);
       }
 
       .social-links {
@@ -434,7 +516,8 @@
 
       .copyright {
         color: var(--text-dark);
-        font-size: 0.9rem;
+        font-size: 1rem;
+        margin-top: 1.5rem;
       }
 
       @keyframes fadeInUp {
@@ -512,8 +595,9 @@
 
       .countdown {
         display: flex;
-        gap: 1rem;
-        margin-top: 2rem;
+        gap: 2rem;
+        margin-top: 2.5rem;
+        justify-content: center;
       }
 
       .countdown-item {
@@ -521,9 +605,9 @@
         flex-direction: column;
         align-items: center;
         background-color: rgba(0, 0, 0, 0.5);
-        padding: 1rem;
-        border-radius: 8px;
-        min-width: 80px;
+        padding: 1.2rem;
+        border-radius: 10px;
+        min-width: 90px;
       }
 
       .countdown-num {
@@ -541,56 +625,69 @@
         position: absolute;
         top: 20%;
         left: -100px;
-        width: 300px;
-        height: 200px;
-        animation: flyDragon 20s linear infinite;
+        width: 420px;
+        height: 280px;
+        animation: flyDragon 12s linear infinite;
+        pointer-events: none;
       }
-
+      .dragon img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        transition: transform 0.5s;
+        /* Will be mirrored via animation */
+      }
       @keyframes flyDragon {
         0% {
-          transform: translateX(0) translateY(0) rotate(5deg);
+          transform: translateX(0) translateY(0) scaleX(1) rotate(5deg);
+        }
+        40% {
+          transform: translateX(1000px) translateY(100px) scaleX(1) rotate(-5deg);
         }
         50% {
-          transform: translateX(1000px) translateY(100px) rotate(-5deg);
+          transform: translateX(1200px) translateY(0) scaleX(-1) rotate(5deg);
+        }
+        90% {
+          transform: translateX(200px) translateY(100px) scaleX(-1) rotate(-5deg);
         }
         100% {
-          transform: translateX(1200px) translateY(0) rotate(5deg);
+          transform: translateX(0) translateY(0) scaleX(1) rotate(5deg);
         }
       }
 
-      @media (max-width: 768px) {
-        .title {
-          font-size: 3rem;
-        }
-
-        .tagline {
-          font-size: 1.3rem;
-        }
-
-        .nav {
-          flex-direction: column;
-          gap: 1rem;
-        }
-
+      @media (max-width: 900px) {
         .about-content,
         .venue-content {
-          grid-template-columns: 1fr;
-        }
-
-        .timeline-item {
           flex-direction: column;
+          gap: 2.5rem;
+        }
+        .section {
+          padding: 3.5rem 1rem;
+        }
+        .nav {
+          padding: 1rem 1.2rem;
+        }
+      }
+      @media (max-width: 600px) {
+        .section {
+          padding: 2rem 0.5rem;
+        }
+        .section-title {
+          font-size: 2rem;
+        }
+        .prize-card {
+          width: 98vw;
+          padding: 1.5rem 0.5rem;
+        }
+        .sponsor-logo {
+          width: 120px;
+          height: 50px;
+        }
+        .nav-links {
           gap: 1rem;
         }
-
-        .timeline-dot {
-          margin-left: 1rem;
-        }
-
-        .timeline-dot::after {
-          left: 0;
-          transform: none;
-          height: calc(100% + 3rem);
-          top: 2rem;
+        .footer-links {
+          gap: 1rem;
         }
       }
     </style>
@@ -618,7 +715,7 @@
 
     <section class="hero">
       <div class="dragon">
-        <img src="/img/flying-dragon.gif" alt="Dragon silhouette" />
+        <img src="img/flying-dragon.gif" alt="Dragon silhouette" />
       </div>
       <div class="fire"></div>
       <div class="hero-content">
@@ -674,7 +771,7 @@
         </div>
         <div class="about-image">
           <img
-            src="/img/about.jpg"
+            src="img/about.jpg"
             alt="Iron Throne"
             style="width: 100%; border-radius: 8px"
           />
@@ -834,7 +931,7 @@
         </div>
         <div class="venue-map">
           <img
-            src="/img/venue.jpg"
+            src="img/venue.jpg"
             alt="Venue Map"
             style="width: 100%; height: 100%; object-fit: cover"
           />
@@ -848,21 +945,21 @@
         <h3 class="sponsor-title">Platinum Sponsors</h3>
         <div class="sponsor-logo">
           <img
-            src="/img/stark.jpg"
+            src="img/stark.jpg"
             alt="House Stark"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
         <div class="sponsor-logo">
           <img
-            src="/img/lannister.jpg"
+            src="img/lannister.jpg"
             alt="House Lannister"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
         <div class="sponsor-logo">
           <img
-            src="/img/Targaryen.webp"
+            src="img/Targaryen.webp"
             alt="House Targaryen"
             style="width: 80%; height: 80%; object-fit: contain"
           />
@@ -872,28 +969,28 @@
         <h3 class="sponsor-title">Gold Sponsors</h3>
         <div class="sponsor-logo">
           <img
-            src="/img/tyrell.png"
+            src="img/tyrell.png"
             alt="House Tyrell"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
         <div class="sponsor-logo">
           <img
-            src="/img/martell.jpg"
+            src="img/martell.jpg"
             alt="House Martell"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
         <div class="sponsor-logo">
           <img
-            src="/img/greyjoy.jpg"
+            src="img/greyjoy.jpg"
             alt="House Greyjoy"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
         <div class="sponsor-logo">
           <img
-            src="/img/baratheon.jpg"
+            src="img/baratheon.jpg"
             alt="House Baratheon"
             style="width: 80%; height: 80%; object-fit: contain"
           />
@@ -903,21 +1000,21 @@
         <h3 class="sponsor-title">Silver Sponsors</h3>
         <div class="sponsor-logo">
           <img
-            src="/img/tully.jpg"
+            src="img/tully.jpg"
             alt="House Tully"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
         <div class="sponsor-logo">
           <img
-            src="/img/arryn.jpg"
+            src="img/arryn.jpg"
             alt="House Arryn"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
         <div class="sponsor-logo">
           <img
-            src="/img/frey.jpg"
+            src="img/frey.jpg"
             alt="House Frey"
             style="width: 80%; height: 80%; object-fit: contain"
           />
@@ -992,5 +1089,36 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      // Countdown Timer for June 15th (current year)
+      function updateCountdown() {
+        const now = new Date();
+        const year = now.getFullYear();
+        // If June 15th has passed this year, count down to next year
+        let target = new Date(year, 5, 15, 0, 0, 0, 0); // Months are 0-indexed
+        if (now > target) {
+          target = new Date(year + 1, 5, 15, 0, 0, 0, 0);
+        }
+        const diff = target - now;
+        if (diff <= 0) {
+          document.getElementById('days').textContent = '0';
+          document.getElementById('hours').textContent = '00';
+          document.getElementById('minutes').textContent = '00';
+          document.getElementById('seconds').textContent = '00';
+          return;
+        }
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        document.getElementById('days').textContent = days;
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    </script>
   </body>
 </html>
