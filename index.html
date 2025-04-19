@@ -100,7 +100,7 @@
         border: none;
         border-radius: 8px;
         cursor: pointer;
-        transition: all 0.2s cubic-bezier(.4,2,.6,1);
+        transition: all 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.3s, transform 0.2s;
         text-transform: uppercase;
         font-weight: bold;
         margin-top: 1.5rem;
@@ -108,7 +108,11 @@
         position: relative;
         overflow: hidden;
       }
-
+      .cta-button:hover {
+        transform: scale(1.06) translateY(-2px);
+        box-shadow: 0 6px 24px rgba(251,191,36,0.18);
+        filter: brightness(1.08);
+      }
       .cta-button:active {
         transform: scale(0.97);
         box-shadow: 0 1px 4px rgba(251,191,36,0.18);
@@ -147,11 +151,34 @@
         backdrop-filter: blur(16px);
         border-radius: 0 0 18px 18px;
         box-shadow: 0 4px 24px rgba(0,0,0,0.12);
-        transition: padding 0.3s, background 0.3s;
+        transition: padding 0.3s, background 0.3s, box-shadow 0.3s;
+      }
+      .nav.scrolled {
+        background: rgba(17, 24, 39, 0.98);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        padding: 0.7rem 2rem;
       }
 
       .nav:hover {
         background: rgba(17, 24, 39, 0.95);
+      }
+
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .college-logo {
+        height: 50px;
+        width: auto;
+        object-fit: contain;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        transition: box-shadow 0.2s;
+      }
+
+      .college-logo:hover {
+        box-shadow: 0 4px 16px rgba(251,191,36,0.18);
       }
 
       .logo {
@@ -173,7 +200,7 @@
         gap: 2.5rem;
       }
 
-      .nav-link {
+      .nav-link, .footer-link {
         color: var(--text);
         text-decoration: none;
         font-size: 1.1rem;
@@ -181,13 +208,13 @@
         letter-spacing: 1px;
         padding: 0.5rem 1rem;
         border-radius: 6px;
-        transition: background 0.2s, color 0.2s, transform 0.2s;
+        transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
       }
-
-      .nav-link:hover {
+      .nav-link:hover, .footer-link:hover {
         color: var(--primary);
         background: var(--accent);
         transform: scale(1.08);
+        box-shadow: 0 2px 12px rgba(251,191,36,0.13);
       }
 
       .section {
@@ -251,6 +278,11 @@
         max-width: 92%;
         border-radius: 14px;
         box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+        transition: transform 0.4s cubic-bezier(.4,2,.6,1), filter 0.3s;
+      }
+      .about-image img:hover, .venue-map img:hover {
+        transform: scale(1.05);
+        filter: brightness(1.08) drop-shadow(0 2px 12px rgba(251,191,36,0.13));
       }
 
       .timeline {
@@ -264,6 +296,12 @@
         display: flex;
         gap: 2rem;
         position: relative;
+        transition: transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s cubic-bezier(.4,2,.6,1);
+      }
+      .timeline-item:hover {
+        transform: translateY(-10px) scale(1.04) rotate(-1deg);
+        box-shadow: 0 12px 32px rgba(251,191,36,0.18);
+        z-index: 2;
       }
 
       .timeline-dot {
@@ -329,16 +367,15 @@
         text-align: center;
         width: 340px;
         margin: 1.2rem 0;
-        transition: all 0.3s cubic-bezier(.4,2,.6,1);
+        transition: transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s cubic-bezier(.4,2,.6,1);
         border: 2px solid transparent;
         box-shadow: 0 4px 24px rgba(0,0,0,0.13);
         cursor: pointer;
       }
-
       .prize-card:hover {
-        transform: translateY(-12px) scale(1.04) rotate(-1deg);
-        border-color: var(--accent);
-        box-shadow: 0 8px 32px rgba(251,191,36,0.13);
+        transform: translateY(-10px) scale(1.04) rotate(-1deg);
+        box-shadow: 0 12px 32px rgba(251,191,36,0.18);
+        z-index: 2;
       }
 
       .prize-title {
@@ -398,15 +435,21 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: all 0.3s cubic-bezier(.4,2,.6,1);
+        transition: transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s cubic-bezier(.4,2,.6,1);
         margin-bottom: 1.2rem;
         box-shadow: 0 2px 12px rgba(0,0,0,0.09);
         cursor: pointer;
       }
-
       .sponsor-logo:hover {
-        transform: scale(1.08) rotate(-2deg);
-        box-shadow: 0 8px 32px rgba(251,191,36,0.13);
+        transform: translateY(-10px) scale(1.04) rotate(-1deg);
+        box-shadow: 0 12px 32px rgba(251,191,36,0.18);
+        z-index: 2;
+      }
+
+      .sponsor-logo img {
+        width: 80%;
+        height: 80%;
+        object-fit: contain;
       }
 
       .faq-content {
@@ -436,16 +479,27 @@
         font-weight: 600;
       }
 
+      .faq-question::after {
+        content: "+";
+        font-size: 1.5rem;
+      }
+
       .faq-answer {
         padding: 0 1.7rem 1.7rem;
         font-size: 1.05rem;
         color: var(--text-dark);
         line-height: 1.8;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(.4,2,.6,1), opacity 0.4s cubic-bezier(.4,2,.6,1);
+        will-change: max-height, opacity;
+        display: block !important;
       }
-
-      .faq-question::after {
-        content: "+";
-        font-size: 1.5rem;
+      .faq-item.open .faq-answer {
+        max-height: 400px;
+        opacity: 1;
+        transition-delay: 0.05s;
       }
 
       .footer {
@@ -477,19 +531,6 @@
         display: flex;
         gap: 2.5rem;
         margin-bottom: 2.5rem;
-      }
-
-      .footer-link {
-        color: var(--text);
-        text-decoration: none;
-        font-size: 1.1rem;
-        font-weight: 500;
-        transition: color 0.2s, text-shadow 0.2s;
-      }
-
-      .footer-link:hover {
-        color: var(--accent);
-        text-shadow: 0 2px 8px rgba(251,191,36,0.13);
       }
 
       .social-links {
@@ -672,6 +713,9 @@
           top: 10%;
           left: -60px;
         }
+        .college-logo {
+          height: 32px;
+        }
       }
       @media (max-width: 600px) {
         .section {
@@ -712,6 +756,9 @@
         }
         .tagline {
           font-size: 1.1rem;
+        }
+        .college-logo {
+          height: 26px;
         }
       }
       .hamburger {
@@ -764,6 +811,17 @@
       .nav.nav-open .hamburger span:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
       }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s cubic-bezier(.4,2,.6,1), transform 0.8s cubic-bezier(.4,2,.6,1);
+        will-change: opacity, transform;
+      }
+      .reveal.reveal-visible {
+        opacity: 1;
+        transform: none;
+      }
     </style>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -776,7 +834,10 @@
   </head>
   <body>
     <nav class="nav">
-      <div class="logo">Hack Of Thrones</div>
+      <div class="nav-brand">
+        <img src="img/kcc.png" alt="KCC Logo" class="college-logo">
+        <div class="logo">Hack Of Thrones</div>
+      </div>
       <div class="hamburger" id="hamburger-menu" aria-label="Open navigation" tabindex="0">
         <span></span>
         <span></span>
@@ -826,23 +887,23 @@
     </section>
 
     <section id="about" class="section">
-      <h2 class="section-title">About The Realm</h2>
+      <h2 class="section-title reveal">About The Realm</h2>
       <div class="about-content">
         <div class="about-text">
-          <p>
+          <p class="reveal">
             Welcome to Hack Of Thrones - The Game of Codes, where the Seven
             Kingdoms of Technology unite for an epic battle of innovation. In
             this 24-hour hackathon, you will forge alliances, build powerful
             solutions, and claim the Iron Throne of Technology.
           </p>
-          <p>
+          <p class="reveal">
             Just as in Game of Thrones, success requires strategy, skill, and
             determination. Teams of up to four members will compete across
             various houses (tracks) including Web Development, Mobile
             Applications, Artificial Intelligence, Blockchain, and Internet of
             Things.
           </p>
-          <p>
+          <p class="reveal">
             Winter is Coming... and so is your chance to showcase your
             technological prowess and creative problem-solving abilities. Join
             us for a night of coding, collaboration, and conquest!
@@ -853,15 +914,16 @@
             src="img/about.jpg"
             alt="Iron Throne"
             style="width: 100%; border-radius: 8px"
+            class="reveal"
           />
         </div>
       </div>
     </section>
 
     <section id="timeline" class="section">
-      <h2 class="section-title">Timeline of Events</h2>
+      <h2 class="section-title reveal">Timeline of Events</h2>
       <div class="timeline">
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-time">May 15, 2025 - 09:00 AM</div>
@@ -872,7 +934,7 @@
             </div>
           </div>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-time">May 15, 2025 - 10:00 AM</div>
@@ -883,7 +945,7 @@
             </div>
           </div>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-time">May 15, 2025 - 11:00 AM</div>
@@ -894,7 +956,7 @@
             </div>
           </div>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-time">May 15, 2025 - 02:00 PM</div>
@@ -904,7 +966,7 @@
             </div>
           </div>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-time">May 15, 2025 - 08:00 PM</div>
@@ -914,7 +976,7 @@
             </div>
           </div>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-time">May 16, 2025 - 10:00 AM</div>
@@ -925,7 +987,7 @@
             </div>
           </div>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-time">May 16, 2025 - 11:00 AM</div>
@@ -935,7 +997,7 @@
             </div>
           </div>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <div class="timeline-time">May 16, 2025 - 02:00 PM</div>
@@ -949,9 +1011,9 @@
     </section>
 
     <section id="prizes" class="section">
-      <h2 class="section-title">Prizes & Glory</h2>
+      <h2 class="section-title reveal">Prizes & Glory</h2>
       <div class="prizes-content">
-        <div class="prize-card">
+        <div class="prize-card reveal">
           <div class="prize-title">First Place</div>
           <div class="prize-amount">$10,000</div>
           <div class="prize-desc">
@@ -959,7 +1021,7 @@
             internship opportunities, and eternal glory.
           </div>
         </div>
-        <div class="prize-card">
+        <div class="prize-card reveal">
           <div class="prize-title">Second Place</div>
           <div class="prize-amount">$5,000</div>
           <div class="prize-desc">
@@ -967,7 +1029,7 @@
             from our sponsors.
           </div>
         </div>
-        <div class="prize-card">
+        <div class="prize-card reveal">
           <div class="prize-title">Third Place</div>
           <div class="prize-amount">$2,500</div>
           <div class="prize-desc">
@@ -975,7 +1037,7 @@
             sponsors.
           </div>
         </div>
-        <div class="prize-card">
+        <div class="prize-card reveal">
           <div class="prize-title">House Awards</div>
           <div class="prize-amount">$1,000</div>
           <div class="prize-desc">
@@ -987,9 +1049,9 @@
     </section>
 
     <section id="venue" class="section">
-      <h2 class="section-title">The Grand Hall</h2>
+      <h2 class="section-title reveal">The Grand Hall</h2>
       <div class="venue-content">
-        <div class="venue-text">
+        <div class="venue-text reveal">
           <h3>The Red Keep Tech Center</h3>
           <p>123 King's Landing Boulevard<br />Westeros City, WC 54321</p>
           <p>
@@ -1013,30 +1075,31 @@
             src="img/venue.jpg"
             alt="Venue Map"
             style="width: 100%; height: 100%; object-fit: cover"
+            class="reveal"
           />
         </div>
       </div>
     </section>
 
     <section id="sponsors" class="section">
-      <h2 class="section-title">The Great Houses</h2>
+      <h2 class="section-title reveal">The Great Houses</h2>
       <div class="sponsors-content">
-        <h3 class="sponsor-title">Platinum Sponsors</h3>
-        <div class="sponsor-logo">
+        <h3 class="sponsor-title reveal">Platinum Sponsors</h3>
+        <div class="sponsor-logo reveal">
           <img
             src="img/stark.jpg"
             alt="House Stark"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
-        <div class="sponsor-logo">
+        <div class="sponsor-logo reveal">
           <img
             src="img/lannister.jpg"
             alt="House Lannister"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
-        <div class="sponsor-logo">
+        <div class="sponsor-logo reveal">
           <img
             src="img/Targaryen.webp"
             alt="House Targaryen"
@@ -1045,29 +1108,29 @@
         </div>
       </div>
       <div class="sponsors-content">
-        <h3 class="sponsor-title">Gold Sponsors</h3>
-        <div class="sponsor-logo">
+        <h3 class="sponsor-title reveal">Gold Sponsors</h3>
+        <div class="sponsor-logo reveal">
           <img
             src="img/tyrell.png"
             alt="House Tyrell"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
-        <div class="sponsor-logo">
+        <div class="sponsor-logo reveal">
           <img
             src="img/martell.jpg"
             alt="House Martell"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
-        <div class="sponsor-logo">
+        <div class="sponsor-logo reveal">
           <img
             src="img/greyjoy.jpg"
             alt="House Greyjoy"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
-        <div class="sponsor-logo">
+        <div class="sponsor-logo reveal">
           <img
             src="img/baratheon.jpg"
             alt="House Baratheon"
@@ -1076,22 +1139,22 @@
         </div>
       </div>
       <div class="sponsors-content">
-        <h3 class="sponsor-title">Silver Sponsors</h3>
-        <div class="sponsor-logo">
+        <h3 class="sponsor-title reveal">Silver Sponsors</h3>
+        <div class="sponsor-logo reveal">
           <img
             src="img/tully.jpg"
             alt="House Tully"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
-        <div class="sponsor-logo">
+        <div class="sponsor-logo reveal">
           <img
             src="img/arryn.jpg"
             alt="House Arryn"
             style="width: 80%; height: 80%; object-fit: contain"
           />
         </div>
-        <div class="sponsor-logo">
+        <div class="sponsor-logo reveal">
           <img
             src="img/frey.jpg"
             alt="House Frey"
@@ -1102,9 +1165,9 @@
     </section>
 
     <section id="faq" class="section">
-      <h2 class="section-title">Ravens' Knowledge</h2>
+      <h2 class="section-title reveal">Ravens' Knowledge</h2>
       <div class="faq-content">
-        <div class="faq-item">
+        <div class="faq-item reveal">
           <div class="faq-question">
             Who can participate in Hack Of Thrones?
           </div>
@@ -1114,7 +1177,7 @@
             old.
           </div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item reveal">
           <div class="faq-question">What should I bring to the hackathon?</div>
           <div class="faq-answer">
             Bring your laptop, charger, any hardware you need for your project,
@@ -1122,7 +1185,7 @@
             place to work.
           </div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item reveal">
           <div class="faq-question">Is there a registration fee?</div>
           <div class="faq-answer">
             No, participation is free of charge thanks to our generous sponsors.
@@ -1130,7 +1193,7 @@
             early!
           </div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item reveal">
           <div class="faq-question">Will there be food and accommodations?</div>
           <div class="faq-answer">
             Yes, meals, snacks, and beverages will be provided throughout the 24
@@ -1138,7 +1201,7 @@
             nearby hotels for discounted rates.
           </div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item reveal">
           <div class="faq-question">
             Can I start working on my project before the hackathon?
           </div>
@@ -1147,7 +1210,7 @@
             hackathon period. Pre-existing projects are not allowed.
           </div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item reveal">
           <div class="faq-question">What kind of projects can I build?</div>
           <div class="faq-answer">
             You can build any software or hardware project that aligns with our
@@ -1215,6 +1278,54 @@
         link.addEventListener('click', () => {
           nav.classList.remove('nav-open');
         });
+      });
+
+      // Reveal on scroll
+      const revealEls = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            entry.target.classList.add('reveal-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      revealEls.forEach(el => {
+        revealObserver.observe(el);
+      });
+
+      // FAQ dropdown functionality
+      document.querySelectorAll('.faq-item').forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        question.addEventListener('click', () => {
+          const isOpen = item.classList.toggle('open');
+          if (isOpen) {
+            question.classList.add('open');
+          } else {
+            question.classList.remove('open');
+          }
+        });
+        // Start with answers hidden (handled by CSS)
+      });
+
+      // Change plus to minus for open FAQ
+      const style = document.createElement('style');
+      style.innerHTML = `
+        .faq-question.open::after {
+          content: "-";
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Nav bar background transition on scroll
+      window.addEventListener('scroll', () => {
+        const nav = document.querySelector('.nav');
+        if (window.scrollY > 30) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
       });
     </script>
   </body>
